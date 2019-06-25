@@ -4,8 +4,6 @@ import HomeScreen from '../components/HomeScreen';
 import AddCharacterContainer from './AddCharacterContainer';
 import Request from '../helpers/Request';
 
-
-
 class MainContainer extends Component{
   constructor(){
     super();
@@ -45,7 +43,7 @@ class MainContainer extends Component{
         return (
           <div>
             <HomeScreen />
-
+            
           </div>
         )
       } else if (this.state.enter === 1) {

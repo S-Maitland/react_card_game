@@ -1,9 +1,22 @@
 import React, {Component} from 'react';
+import HomeScreen from './HomeScreen';
+import './Game.css';
 
 class GameScreen extends Component{
+  constructor(props){
+    super(props);
+  }
+
+  componentDidMount(){
+    
+  }
+
   render(){
     return(
-      <p>GAMESCREEN</p>
+      <div className= "gameScreenBackground">
+        <p>{this.props.player.name}</p>
+        <p>{this.props.enemy.name}</p>
+      </div>
     );
   }
 }
