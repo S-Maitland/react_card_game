@@ -3,7 +3,7 @@
   font-family: 'MedievalSharp', cursive;
   font-size: 80px;
   font-weight: bold;
-  top: 20%;
+  top: 0%;
   display: block;
   position: absolute;
   text-align: center;
@@ -89,4 +89,8 @@
     margin-left: 0%;
     width: 100%;
   }
+}
+
+.fighter{
+  border: solid 5px red;
 }

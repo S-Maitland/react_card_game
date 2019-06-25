@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import GameScreen from '../components/GameScreen';
+import Title from './Title'
+import Venom from './fighters/Venom'
+import Ghimli from './fighters/Ghimli'
+import PaladinKnight from './fighters/PaladinKnight'
 
 class HomeScreen extends Component{
   constructor(){
@@ -11,22 +15,22 @@ class HomeScreen extends Component{
       characterSelect: ""
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+    this.handleCharacterSelect = this.handleCharacterSelect.bind(this);
   }
 
-  handleChange(event) {
+  handleNameChange(event) {
     this.setState({playerName: event.target.value});
   }
 
-  handleSelect(event) {
+  handleCharacterSelect(event) {
     this.setState({characterSelect: event.target.value});
   }
 
   handleSubmit(event){
     event.preventDefault();
-    this.setState({newGame: true});
+    this.setState({startGame: true});
   }
 
   render(){
@@ -36,17 +40,23 @@ class HomeScreen extends Component{
       } else {
         return(
           <div>
-            <span className="title">Code Clashers</span>
+            <span className="title">{<Title/>}</span>
             <span className="enterName">
               <form onSubmit={this.handleSubmit}>
-                <input className="form-input" type="text" value={this.state.playerName} onChange={this.handleChange} placeholder="Enter Your Name..." required/>
+                <input className="form-input" type="text" value={this.state.playerName} onChange={this.handleNameChange} placeholder="Enter Your Name..." required/>
                 <br/>
+
+                <Venom className="fighter" onClick="handleCharacterSelect"/>
+                <Ghimli className="fighter" onClick="handleCharacterSelect"/>
+                <PaladinKnight className="fighter" onClick="handleCharacterSelect"/>
+                
                 <button className="form-btn">Start Fight</button>
-              </form></span>
-            </div>
-          );
-        }
+              </form>
+            </span>
+          </div>
+        );
       }
     }
+  }
 
-    export default HomeScreen;
+  export default HomeScreen;
