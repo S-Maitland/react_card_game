@@ -1,0 +1,61 @@
+canvas{
+  background-repeat:no-repeat;
+  border: 2px solid red;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centerScreen{
+  display: block;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.title {
+  color: red;
+  font-family: 'MedievalSharp', cursive;
+  font-size: 80px;
+  font-weight: bold;
+  top: 20%;
+}
+
+.form-input{
+  font-family: 'MedievalSharp', cursive;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.form-label{
+  font-family: 'MedievalSharp', cursive;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.form-btn{
+  text-align: center;
+  display: inline-block;
+  margin:5px;
+  font-weight: bold;
+  font-family: 'MedievalSharp', cursive;
+  padding: 10px 10px 10px 10px ;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 .2em gray;
+  cursor: pointer;
+}
+
+.pressSpace {
+  color: black;
+  font-family: 'MedievalSharp', cursive;
+  font-size: 25px;
+  font-weight: bold;
+  top: 35%;
+}
