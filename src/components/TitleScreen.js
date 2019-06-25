@@ -6,6 +6,7 @@ class TitleScreen extends Component{
       <div>
         <span className="centerScreen title">Code Clashers</span>
         <span className="centerScreen pressSpace">Press Enter to start the game if ye be brave enough?</span>
+        
       </div>
     )
   }
