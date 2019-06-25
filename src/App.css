@@ -1,34 +1,16 @@
-canvas{
-  background-repeat:no-repeat;
-  border: 2px solid red;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.centerScreen{
-  display: block;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  z-index: 1;
-}
-
 .title {
   color: red;
   font-family: 'MedievalSharp', cursive;
   font-size: 80px;
   font-weight: bold;
-  top: 20%;
+  top: 0%;
+  display: block;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
 .form-input{
-  font-family: 'MedievalSharp', cursive;
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.form-label{
   font-family: 'MedievalSharp', cursive;
   font-size: 25px;
   font-weight: bold;
@@ -52,10 +34,63 @@ canvas{
   cursor: pointer;
 }
 
-.pressSpace {
-  color: black;
-  font-family: 'MedievalSharp', cursive;
-  font-size: 25px;
-  font-weight: bold;
-  top: 35%;
+.enterName{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 90px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: 5px;
+  animation-duration: 0.5s;
+  animation-name: slidein;
+}
+
+.pressEnter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 90px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: 5px;
+  text-shadow: -2px 0 0 #fdff2a,
+  -4px 0 0 #df4a42,
+  2px 0 0 #91fcfe,
+  4px 0 0 #4405fc;
+  animation: blink 1s steps(4, start) infinite;
+}
+
+@keyframes blink{
+  to{
+    visibility: hidden
+  }
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+.fighter{
+  border: solid 5px red;
 }

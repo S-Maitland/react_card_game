@@ -14,7 +14,6 @@ class MainContainer extends Component{
       enter: 1,
       //1 title screen, 2 home screen, 3 addcharacter screen...
     };
-
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleAddCharacter = this.handleAddCharacter.bind(this);
 
