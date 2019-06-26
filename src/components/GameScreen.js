@@ -132,19 +132,21 @@ class GameScreen extends Component{
     } else{
       return(
         <div className= "gameScreenBackground">
+          {/* //popup questions */}
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal">
+            <div> <Question1 handleModalSubmit = {this.handleModalSubmit}/> </div>
+          </Modal>
+
+          {/* player card */}
           <div class="player" img src="../assets/hero1.png"></div>
           <div className="leftcontainer">
             <div className="thecard">
               <div className="thefront">
-
-                <Modal
-                  isOpen={this.state.modalIsOpen}
-                  onAfterOpen={this.afterOpenModal}
-                  onRequestClose={this.closeModal}
-                  style={customStyles}
-                  contentLabel="Example Modal">
-                  <div> <Question1 handleModalSubmit = {this.handleModalSubmit}/> </div>
-                </Modal>
                 <h1>
                   <label>{this.props.player.name}</label>
                 </h1>
@@ -163,11 +165,10 @@ class GameScreen extends Component{
                   <label>DRAGON CHOP</label>
                 </button>
               </div>
-              <div className="theback" img src="./assets/images/card-back1.jpg">
-              </div>
             </div>
           </div>
 
+          {/* enemy card */}
         <div class="rightcontainer">
           <div class="thecard">
             <div className="thefront">
@@ -188,8 +189,6 @@ class GameScreen extends Component{
                 <label>LIGHTNING PUNCH</label>
               </button>
             </div>
-            <div class="theback" img src="../assets/card-back1.jpg" >
-          </div>
         </div>
       </div>
     </div>

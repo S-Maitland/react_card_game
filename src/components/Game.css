@@ -36,9 +36,7 @@
   background: none;
   top: 1%;
   left: 1%;
-  /* transform: translate(-50%, -50%); */
     float:left;
-
 }
 .rightcontainer{
   position: absolute;
@@ -47,8 +45,12 @@
   background: none;
   top: 1%;
   right: 1%;
-  /* transform: translate(-50%, -50%); */
     float:left;
+}
+
+/* THE PSUEDO CLASS CONTROLS THE FLIP ON EVENT */
+.cardIsFlipped{
+  transform: rotateY(180deg);
 }
 
 /* THE CARD HOLDS THE FRONT AND BACK FACES */
@@ -61,11 +63,6 @@
   border-radius: 10px;
   transform-style: preserve-3d;
   transition: all 0.8s ease;
-}
-
-/* THE PSUEDO CLASS CONTROLS THE FLIP ON EVENT */
-.cardIsFlipped{
-  transform: rotateY(180deg);
 }
 
 /* THE FRONT FACE OF THE CARD, WHICH SHOWS BY DEFAULT */
