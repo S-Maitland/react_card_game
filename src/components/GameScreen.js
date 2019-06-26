@@ -8,12 +8,12 @@ import Question1 from './Questions/Question1';
 
 const customStyles = {
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
@@ -45,13 +45,17 @@ class GameScreen extends Component{
     this.handleModalSubmit = this.handleModalSubmit.bind(this);
     this.callQuestion = this.callQuestion.bind(this);
     this.openModal = this.openModal.bind(this);
-    // this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  leftCardFlip(){
-    const leftCard = document.querySelector('.leftcontainer');
+  leftCardReveal(){
+    const leftCard = document.querySelector('.thecard');
     leftCard.classList.toggle('cardIsFlipped')
+  }
+
+  rightCardReveal(){
+    const rightCard = document.querySelector('.thecard');
+    rightCard.classList.toggle('cardIsFlipped')
   }
 
   changeTrue(){
@@ -70,7 +74,7 @@ class GameScreen extends Component{
     this.setState({modalIsOpen: false});
     if(this.state.answerCorrectly === false){
       this.handlePlayerTurn();
-      this.leftCardFlip();
+      this.leftCardReveal();
     }
   }
 
@@ -143,14 +147,14 @@ class GameScreen extends Component{
           </Modal>
 
           {/* player card */}
-          <div class="player" img src="../assets/hero1.png"></div>
-          <div className="leftcontainer">
-            <div className="thecard">
-              <div className="thefront">
+          {/* <div className="player" img src="../assets/hero1.png"></div> */}
+          <div id="leftcontainer">
+            <div id="f1_card">
+              <div className="front face">
                 <h1>
                   <label>{this.props.player.name}</label>
                 </h1>
-                <label>HP: {this.state.playerHealth}</label>
+                <label>{this.state.playerHealth}</label>
                 <br />
                 <button className="moveButton" onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON PUNCH</label>
@@ -165,36 +169,40 @@ class GameScreen extends Component{
                   <label>DRAGON CHOP</label>
                 </button>
               </div>
+              <div className="back face">
+            </div>
             </div>
           </div>
 
           {/* enemy card */}
-        <div class="rightcontainer">
-          <div class="thecard">
-            <div className="thefront">
-              <h1>
-                <label>{this.props.enemy.name}</label>
-              </h1>
-              <label>{this.state.enemyHealth}</label>
-              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
-                <label>LIGHTNING PUNCH</label>
-              </button>
-              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
-                <label>LIGHTNING PUNCH</label>
-              </button>
-              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
-                <label>LIGHTNING PUNCH</label>
-              </button>
-              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
-                <label>LIGHTNING PUNCH</label>
-              </button>
+          <div id="rightcontainer">
+            <div id="f1_card">
+              <div className="front face">
+                <h1>
+                  <label>{this.props.enemy.name}</label>
+                </h1>
+                <label>{this.state.enemyHealth}</label>
+                <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+                <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+                <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+                <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+              </div>
+              <div className="back face center">
             </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  );
-}
-}
+      );
+    }
+  }
 
 }
 
