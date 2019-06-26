@@ -127,7 +127,7 @@ class GameScreen extends Component{
     } else{
       return(
         <div className= "gameScreenBackground">
-        <div class="player" img src="../assets/hero1.png"></div>
+          <div class="player" img src="../assets/hero1.png"></div>
           <div className="leftcontainer">
             <div className="thecard">
               <div className="thefront">
@@ -183,35 +183,32 @@ class GameScreen extends Component{
                   <label>LIGHTNING PUNCH</label>
                 </button>
               </div>
-              <div className="theback" >
-                {/* <img src="./assets/images/card-back1.jpg" /> */}
+              <div className="theback" img src="./assets/images/card-back1.jpg">
               </div>
 
-        </div>
-      </div>
-
-      <div class="rightcontainer">
-        <div class="thecard">
-          <div class="thefront">
-            <h1>
-              <label>{this.props.enemy.name}</label>
-            </h1>
-            <label>{this.state.enemyHealth}</label>
-            <button onClick={this.handleEnemyAttack}>
-              <label>ATTACK</label>
-            </button>
+            </div>
           </div>
-          <div class="theback" img src="../assets/card-back1.jpg" >
+
+          <div class="rightcontainer">
+            <div class="thecard">
+              <div class="thefront">
+                <h1>
+                  <label>{this.props.enemy.name}</label>
+                </h1>
+                <label>{this.state.enemyHealth}</label>
+                <button onClick={this.handleEnemyAttack}>
+                  <label>ATTACK</label>
+                </button>
+              </div>
+              <div class="theback" img src="../assets/card-back1.jpg" >
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-  );
+    );
   }
-        </div>
-      );
-    }
+}
 
-  }
+}
 
-  export default GameScreen;
+export default GameScreen;
