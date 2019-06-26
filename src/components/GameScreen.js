@@ -30,7 +30,8 @@ class GameScreen extends Component{
       gameOver:  false,
       gameWon: false,
       modalIsOpen: false,
-      answerCorrectly: false
+      answerCorrectly: false,
+      random: 0
     }
 
     this.changeTrue = this.changeTrue.bind(this);
@@ -47,7 +48,18 @@ class GameScreen extends Component{
     this.openModal = this.openModal.bind(this);
     // this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.chooseRandomNumber = this.chooseRandomNumber.bind(this);
   }
+
+
+  chooseRandomNumber(){
+    const min = 1;
+   const max = 3;
+   const rand = min + Math.random() * (max - min);
+   this.setState({ random: this.state.random + rand }, console.log(this.state.random));
+  }
+
+
 
   changeTrue(){
     this.setState({answerCorrectly: true})
@@ -57,10 +69,11 @@ class GameScreen extends Component{
     this.setState({answerCorrectly: false})
   }
 
+
+
   openModal() {
     this.setState({modalIsOpen: true});
   }
-
   closeModal() {
     this.setState({modalIsOpen: false});
     if(this.state.answerCorrectly === false){
@@ -68,32 +81,40 @@ class GameScreen extends Component{
     }
   }
 
+
+
   handleGameOver(){
     if (this.state.playerHealth <= 0){
       this.setState({gameOver: true})
     }
   }
-
   handleGameWon(){
     if (this.state.enemyHealth <= 0){
       this.setState({gameWon: true})
     }
   }
 
+
+
   handlePlayerTurn = () => {
     this.handleGameOver()
     this.setState({playerTurn: false})
     this.setState({enemyTurn: true})
   }
-
   handleEnemyTurn = () => {
     this.setState({enemyTurn: false})
     this.setState({playerTurn: true}, this.callQuestion)
   }
 
+
+
   callQuestion(){
     this.openModal()
+    this.chooseRandomNumber()
+
   }
+
+
 
   handlePlayerPunchAttack = () => {
     if(this.state.playerTurn === true){
@@ -101,7 +122,6 @@ class GameScreen extends Component{
       this.handlePlayerTurn()
     }
   }
-
   handleEnemyPunchAttack = () => {
     if(this.state.enemyTurn === true){
       this.setState({playerHealth: (this.state.playerHealth - 90)}, this.handleGameOver)
@@ -110,10 +130,14 @@ class GameScreen extends Component{
   }
 
 
+
+
   handleModalSubmit(answerState){
     this.setState({answerCorrectly: answerState})
     this.closeModal();
   }
+
+
 
   render(){
     if (this.state.gameWon === true){
@@ -126,37 +150,36 @@ class GameScreen extends Component{
       )
     } else{
       return(
+
         <div className= "gameScreenBackground">
-          <div class="player" img src="../assets/hero1.png"></div>
+          <div className="player" img src="../assets/hero1.png"></div>
           <div className="leftcontainer">
             <div className="thecard">
               <div className="thefront">
 
-                <Modal
-                  isOpen={this.state.modalIsOpen}
-                  onAfterOpen={this.afterOpenModal}
-                  onRequestClose={this.closeModal}
-                  style={customStyles}
-                  contentLabel="Example Modal">
-                  <div> <Question1 handleModalSubmit = {this.handleModalSubmit}/> </div>
-                </Modal>
+
                 <h1>
                   <label>{this.props.player.name}</label>
                 </h1>
                 <label>HP: {this.state.playerHealth}</label>
                 <br />
+
                 <button onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON PUNCH</label>
                 </button>
+
                 <button onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON KICK</label>
                 </button>
+
                 <button onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON SLASH</label>
                 </button>
+
                 <button onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON CHOP</label>
                 </button>
+
               </div>
               <div className="theback">
                 {/* <img src="./assets/images/card-back1.jpg" /> */}
@@ -189,9 +212,9 @@ class GameScreen extends Component{
             </div>
           </div>
 
-          <div class="rightcontainer">
-            <div class="thecard">
-              <div class="thefront">
+          <div className="rightcontainer">
+            <div className="thecard">
+              <div className="thefront">
                 <h1>
                   <label>{this.props.enemy.name}</label>
                 </h1>
@@ -200,11 +223,22 @@ class GameScreen extends Component{
                   <label>ATTACK</label>
                 </button>
               </div>
-              <div class="theback" img src="../assets/card-back1.jpg" >
+            <div className="theback" img src="../assets/card-back1.jpg" >
+          </div>
             </div>
           </div>
+
+
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal">
+            <div> <Question1 handleModalSubmit = {this.handleModalSubmit}/> </div>
+          </Modal>
+
         </div>
-      </div>
     );
   }
 }
