@@ -29,14 +29,13 @@
   justify-content: flex-start;
 }
 
-
 .leftcontainer{
   position: absolute;
   width: 250px;
   height: 320px;
   background: none;
-  top: 15%;
-  left: 5%;
+  top: 1%;
+  left: 1%;
   /* transform: translate(-50%, -50%); */
     float:left;
 
@@ -46,11 +45,10 @@
   width: 250px;
   height: 320px;
   background: none;
-  top: 15%;
-  right: 5%;
+  top: 1%;
+  right: 1%;
   /* transform: translate(-50%, -50%); */
     float:left;
-
 }
 
 /* THE CARD HOLDS THE FRONT AND BACK FACES */
@@ -65,10 +63,10 @@
   transition: all 0.8s ease;
 }
 
-/* THE PSUEDO CLASS CONTROLS THE FLIP ON MOUSEOVER AND MOUSEOUT */
-/* .thecard:hover{
+/* THE PSUEDO CLASS CONTROLS THE FLIP ON EVENT */
+.cardIsFlipped{
   transform: rotateY(180deg);
-} */
+}
 
 /* THE FRONT FACE OF THE CARD, WHICH SHOWS BY DEFAULT */
  .thefront{
@@ -116,4 +114,32 @@
   font-weight: normal;
   font-size: 12px;
   text-align: center;
+}
+
+.player{
+ z-index: 1;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-image: url(../assets/images/hero1.png);
+ background-repeat: no-repeat;
+}
+
+.moveButton{
+  text-align: center;
+  display: inline-block;
+  margin:5px;
+  font-weight: bold;
+  font-family: 'MedievalSharp', cursive;
+  padding: 10px 10px 10px 10px ;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 .2em gray;
+  cursor: pointer;
 }

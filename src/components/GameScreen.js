@@ -49,6 +49,11 @@ class GameScreen extends Component{
     this.closeModal = this.closeModal.bind(this);
   }
 
+  leftCardFlip(){
+    const leftCard = document.querySelector('.leftcontainer');
+    leftCard.classList.toggle('cardIsFlipped')
+  }
+
   changeTrue(){
     this.setState({answerCorrectly: true})
   }
@@ -65,6 +70,7 @@ class GameScreen extends Component{
     this.setState({modalIsOpen: false});
     if(this.state.answerCorrectly === false){
       this.handlePlayerTurn();
+      this.leftCardFlip();
     }
   }
 
@@ -109,7 +115,6 @@ class GameScreen extends Component{
     }
   }
 
-
   handleModalSubmit(answerState){
     this.setState({answerCorrectly: answerState})
     this.closeModal();
@@ -145,68 +150,51 @@ class GameScreen extends Component{
                 </h1>
                 <label>HP: {this.state.playerHealth}</label>
                 <br />
-                <button onClick={this.handlePlayerPunchAttack}>
+                <button className="moveButton" onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON PUNCH</label>
                 </button>
-                <button onClick={this.handlePlayerPunchAttack}>
+                <button className="moveButton" onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON KICK</label>
                 </button>
-                <button onClick={this.handlePlayerPunchAttack}>
+                <button className="moveButton" onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON SLASH</label>
                 </button>
-                <button onClick={this.handlePlayerPunchAttack}>
+                <button className="moveButton" onClick={this.handlePlayerPunchAttack}>
                   <label>DRAGON CHOP</label>
-                </button>
-              </div>
-              <div className="theback">
-                {/* <img src="./assets/images/card-back1.jpg" /> */}
-              </div>
-            </div>
-          </div>
-          <div className="rightcontainer">
-            <div className="thecard">
-              <div className="thefront">
-                <h1>
-                  <label>{this.props.enemy.name}</label>
-                </h1>
-                <label>{this.state.enemyHealth}</label>
-                <button onClick={this.handleEnemyPunchAttack}>
-                  <label>LIGHTNING PUNCH</label>
-                </button>
-                <button onClick={this.handleEnemyPunchAttack}>
-                  <label>LIGHTNING PUNCH</label>
-                </button>
-                <button onClick={this.handleEnemyPunchAttack}>
-                  <label>LIGHTNING PUNCH</label>
-                </button>
-                <button onClick={this.handleEnemyPunchAttack}>
-                  <label>LIGHTNING PUNCH</label>
                 </button>
               </div>
               <div className="theback" img src="./assets/images/card-back1.jpg">
               </div>
-
             </div>
           </div>
 
-          <div class="rightcontainer">
-            <div class="thecard">
-              <div class="thefront">
-                <h1>
-                  <label>{this.props.enemy.name}</label>
-                </h1>
-                <label>{this.state.enemyHealth}</label>
-                <button onClick={this.handleEnemyAttack}>
-                  <label>ATTACK</label>
-                </button>
-              </div>
-              <div class="theback" img src="../assets/card-back1.jpg" >
+        <div class="rightcontainer">
+          <div class="thecard">
+            <div className="thefront">
+              <h1>
+                <label>{this.props.enemy.name}</label>
+              </h1>
+              <label>{this.state.enemyHealth}</label>
+              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                <label>LIGHTNING PUNCH</label>
+              </button>
+              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                <label>LIGHTNING PUNCH</label>
+              </button>
+              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                <label>LIGHTNING PUNCH</label>
+              </button>
+              <button className="moveButton" onClick={this.handleEnemyPunchAttack}>
+                <label>LIGHTNING PUNCH</label>
+              </button>
             </div>
+            <div class="theback" img src="../assets/card-back1.jpg" >
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 }
