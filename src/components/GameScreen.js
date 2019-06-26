@@ -1,6 +1,23 @@
 import React, {Component} from 'react';
 import HomeScreen from './HomeScreen';
 import './Game.css';
+import GameOver from '../components/GameOver'
+import GameWon from '../components/GameWon';
+import Modal from 'react-modal';
+import Question1 from './Questions/Question1';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+Modal.setAppElement('#root')
 
 class GameScreen extends Component{
   constructor(props){
@@ -9,16 +26,60 @@ class GameScreen extends Component{
       playerHealth: this.props.player.health,
       playerTurn: true,
       enemyHealth: this.props.enemy.health,
-      enemyTurn: false
+      enemyTurn: false,
+      gameOver:  false,
+      gameWon: false,
+      modalIsOpen: false,
+      answerCorrectly: false
     }
 
+    this.changeTrue = this.changeTrue.bind(this);
+    this.changeFalse = this.changeFalse.bind(this);
+
     this.handlePlayerPunchAttack = this.handlePlayerPunchAttack.bind(this);
-    this.handleEnemyAttack = this.handleEnemyAttack.bind(this);
+    this.handleEnemyPunchAttack = this.handleEnemyPunchAttack.bind(this);
     this.handlePlayerTurn = this.handlePlayerTurn.bind(this);
     this.handleEnemyTurn = this.handleEnemyTurn.bind(this);
+    this.handleGameOver = this.handleGameOver.bind(this);
+    this.handleGameWon = this.handleGameWon.bind(this);
+    // this.handleModalSubmit = this.handleModalSubmit.bind(this);
+
+    this.openModal = this.openModal.bind(this);
+    // this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  changeTrue(){
+    this.setState({answerCorrectly: true})
+  }
+
+  changeFalse(){
+    this.setState({answerCorrectly: false})
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
+  handleGameOver(){
+    if (this.state.playerHealth <= 0){
+      this.setState({gameOver: true})
+    }
+  }
+
+  handleGameWon(){
+    console.log(this.state.enemyHealth <= 0);
+    if (this.state.enemyHealth <= 0){
+      this.setState({gameWon: true})
+    }
   }
 
   handlePlayerTurn = () => {
+    this.handleGameOver()
     this.setState({playerTurn: false})
     this.setState({enemyTurn: true})
   }
@@ -30,17 +91,18 @@ class GameScreen extends Component{
 
   handlePlayerPunchAttack = () => {
     if(this.state.playerTurn === true){
-      this.setState({enemyHealth: (this.state.enemyHealth - 10)})
+      this.setState({enemyHealth: (this.state.enemyHealth - 90)}, this.handleGameWon)
       this.handlePlayerTurn()
     }
   }
 
-  handleEnemyAttack = () => {
+  handleEnemyPunchAttack = () => {
     if(this.state.enemyTurn === true){
-      this.setState({playerHealth: (this.state.playerHealth - 10)})
+      this.setState({playerHealth: (this.state.playerHealth - 90)}, this.handleGameOver)
       this.handleEnemyTurn()
     }
   }
+
 
   render(){
       return(
@@ -57,9 +119,86 @@ class GameScreen extends Component{
               <button onClick={this.handlePlayerPunchAttack}>
                 <label>DRAGON PUNCH</label>
               </button>
+
+  handleModalSubmit = (answerState) => {
+    this.setState({answerCorrectly: answerState})
+  }
+
+  render(){
+    if (this.state.gameWon === true){
+      return (
+        <GameWon/>
+      )
+    } else if (this.state.gameOver === true){
+      return (
+        <GameOver/>
+      )
+    } else{
+      return(
+        <div className= "gameScreenBackground">
+          <div className="leftcontainer">
+            <div className="thecard">
+              <div className="thefront">
+
+                <button onClick={this.openModal}>Open Modal</button>
+                <Modal
+                  isOpen={this.state.modalIsOpen}
+                  onAfterOpen={this.afterOpenModal}
+                  onRequestClose={this.closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal">
+                  <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+
+                  <div>I am a modal</div>
+                  <div> <Question1 handleModalSubmit = {this.handleModalSubmit}/> </div>
+                </Modal>
+                <h1>
+                  <label>{this.props.player.name}</label>
+                </h1>
+                <label>HP: {this.state.playerHealth}</label>
+                <br />
+                <button onClick={this.handlePlayerPunchAttack}>
+                  <label>DRAGON PUNCH</label>
+                </button>
+                <button onClick={this.handlePlayerPunchAttack}>
+                  <label>DRAGON KICK</label>
+                </button>
+                <button onClick={this.handlePlayerPunchAttack}>
+                  <label>DRAGON SLASH</label>
+                </button>
+                <button onClick={this.handlePlayerPunchAttack}>
+                  <label>DRAGON CHOP</label>
+                </button>
+              </div>
+              <div className="theback">
+                {/* <img src="./assets/images/card-back1.jpg" /> */}
+              </div>
             </div>
-            <div class="theback" img src="../assets/card-back1.jpg" >
           </div>
+          <div className="rightcontainer">
+            <div className="thecard">
+              <div className="thefront">
+                <h1>
+                  <label>{this.props.enemy.name}</label>
+                </h1>
+                <label>{this.state.enemyHealth}</label>
+                <button onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+                <button onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+                <button onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+                <button onClick={this.handleEnemyPunchAttack}>
+                  <label>LIGHTNING PUNCH</label>
+                </button>
+              </div>
+              <div className="theback" >
+                {/* <img src="./assets/images/card-back1.jpg" /> */}
+              </div>
+
         </div>
       </div>
 
@@ -81,6 +220,10 @@ class GameScreen extends Component{
     </div>
   );
   }
+        </div>
+      );
+    }
+
   }
 
   export default GameScreen;
