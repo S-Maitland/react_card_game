@@ -43,14 +43,14 @@ class MainContainer extends Component{
         return (
           <div>
             <HomeScreen />
-            
+
           </div>
         )
       } else if (this.state.enter === 1) {
         return(
           <div>
             { <TitleScreen/> }
-            <button onClick={this.handleAddCharacter}>Add Character</button>
+            {/* <button onClick={this.handleAddCharacter}>Add Character</button> */}
           </div>
         );
       }
