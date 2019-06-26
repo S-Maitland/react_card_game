@@ -42,8 +42,8 @@ class GameScreen extends Component{
     this.handleEnemyTurn = this.handleEnemyTurn.bind(this);
     this.handleGameOver = this.handleGameOver.bind(this);
     this.handleGameWon = this.handleGameWon.bind(this);
-    // this.handleModalSubmit = this.handleModalSubmit.bind(this);
-
+    this.handleModalSubmit = this.handleModalSubmit.bind(this);
+    this.callQuestion = this.callQuestion.bind(this);
     this.openModal = this.openModal.bind(this);
     // this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -63,6 +63,9 @@ class GameScreen extends Component{
 
   closeModal() {
     this.setState({modalIsOpen: false});
+    if(this.state.answerCorrectly === false){
+      this.handlePlayerTurn();
+    }
   }
 
   handleGameOver(){
@@ -72,7 +75,6 @@ class GameScreen extends Component{
   }
 
   handleGameWon(){
-    console.log(this.state.enemyHealth <= 0);
     if (this.state.enemyHealth <= 0){
       this.setState({gameWon: true})
     }
@@ -85,8 +87,12 @@ class GameScreen extends Component{
   }
 
   handleEnemyTurn = () => {
-    this.setState({playerTurn: true})
     this.setState({enemyTurn: false})
+    this.setState({playerTurn: true}, this.callQuestion)
+  }
+
+  callQuestion(){
+    this.openModal()
   }
 
   handlePlayerPunchAttack = () => {
@@ -103,8 +109,9 @@ class GameScreen extends Component{
     }
   }
 
-  handleModalSubmit = (answerState) => {
+  handleModalSubmit(answerState){
     this.setState({answerCorrectly: answerState})
+    this.closeModal();
   }
 
   render(){
@@ -123,16 +130,12 @@ class GameScreen extends Component{
             <div className="thecard">
               <div className="thefront">
 
-                <button onClick={this.openModal}>Open Modal</button>
                 <Modal
                   isOpen={this.state.modalIsOpen}
                   onAfterOpen={this.afterOpenModal}
                   onRequestClose={this.closeModal}
                   style={customStyles}
                   contentLabel="Example Modal">
-                  <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-
-                  <div>I am a modal</div>
                   <div> <Question1 handleModalSubmit = {this.handleModalSubmit}/> </div>
                 </Modal>
                 <h1>
